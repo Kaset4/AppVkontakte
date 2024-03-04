@@ -1,0 +1,74 @@
+﻿@model AppVkontakte.ViewModels.UserViewModel
+
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="block-user background-white">
+    <h2 class="center ">@Model.User.LastName @Model.User.FirstName</h2>
+    <div class="d-flex m-content">
+        <div>
+            <div>
+                <img src="@Model.User.Image" style="max-width: 500px"/>
+            </div>
+            <div>
+                <form method="get" asp-controller="AccountManager" asp-action="Edit">
+                    <input class="enter_submit" type="submit" value="Редактировать"/>
+                </form>
+
+            </div>
+        </div>
+        <div class="user-about-wrapper">
+            <div class="user-about">
+                <div class="text-color-gray">Статус: <span class="text-color-black">@Model.User.Status</span></div>
+                <div class="text-color-gray">Дата рождения: <span class="text-color-black">@Model.User.BirthDate</span></div>
+                <div class="text-color-gray">О себе: <span class="text-color-black">@Model.User.About</span></div>
+                <div class="text-color-gray">Email: <span class="text-color-black">@Model.User.Email</span></div>
+            </div>
+            <div class="user-friend">
+                <div>
+                    <label class="gray-text">Список друзей</label>
+
+                    @if (Model.Friends.Count != 0)
+                    {
+                        <div class="d-flex flex-wrap justify-content-between">
+                            @foreach (var user in @Model.Friends)
+                            {
+                                <div>
+                                    <div class="mrgn center-align">
+                                        <img src="@user.Image" class="ava" />
+                                    </div>
+                                    <div class="mrgn center-align">
+                                        @user.GetFullName()
+                                    </div>
+                                    <div class="mrgn center-align">
+                                        <form asp-controller="AccountManager" asp-action="Chat" asp-route-id="@user.Id" method="post">
+                                            <button type="submit" class="btn btn-sm btn-primary min-width-but">
+                                                Чат
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="mrgn center-align">
+                                        <form asp-controller="AccountManager" asp-action="DeleteFriend" asp-route-id="@user.Id" method="post">
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                Удалить из друзей
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div>
+                            <label> У вас пока нет друзей.</label>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

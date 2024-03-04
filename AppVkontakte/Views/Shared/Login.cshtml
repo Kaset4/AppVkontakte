@@ -1,0 +1,31 @@
+﻿@model AppVkontakte.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="block-reg background-white">
+    <h4 class="center">Добро пожаловать!</h4>
+    <form class="frm" method="post" asp-controller="AccountManager" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="mrgn">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <div class="mrgn">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div> 
+            <input asp-for="RememberMe" />
+            <label asp-for="RememberMe"></label>
+        </div>
+        <div>
+            <input class="enter_submit" type="submit" value="Войти" />
+        </div>
+    </form>
+</div>

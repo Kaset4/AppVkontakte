@@ -1,0 +1,34 @@
+﻿@model AppVkontakte.ViewModels.MainViewModel;
+﻿@using Microsoft.AspNetCore.Identity;
+@using AppVkontakte.Models;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    
+}
+else
+{
+
+    <div class="row center justify-content-center">
+        <div class="side center">
+            <div class="center">
+                Пользуйтесь нашей самой крутой соцсетью! Регистрируйтесь всего за 2 минуты, делитесь мыслями, находите новых друзей.
+            </div>
+            <img class="main-img" src="~/img/pngwing.com.png"/>
+        </div>
+
+
+        <div class="main center w-auto">
+            <partial name="Login" model="Model.LoginView" />
+            <partial name="Register" model="Model.RegisterView" />
+        </div>
+
+    </div>
+}
